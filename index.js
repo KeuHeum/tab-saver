@@ -1,12 +1,15 @@
-const download = res =>
+const download = res => {
+    let today = new Date();
+
     chrome.downloads.download({
         url: URL.createObjectURL(
             new Blob([res], {
                 type: 'application/json',
             }),
         ),
-        filename: 'tabs.json',
+        filename: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} tabs.json`,
     })
+}
 
 const getAllTabsId = async () =>
     JSON.stringify(
@@ -29,18 +32,27 @@ const getAllTabsId = async () =>
 
 document.addEventListener('DOMContentLoaded', async domEv => {
     const extractBtn = document.getElementById('extract')
-    const importBtn = document.getElementById('import')
+    const importBtn = document.getElementById('import-btn')
+    const importFile = document.getElementById('import-file')
+    const tabs_count = document.getElementById('tabs-count')
     const out = document.getElementById('out')
-
+    
     extractBtn.addEventListener('click', async ev => {
         const res = await getAllTabsId()
-
         out.innerText = res
+
+        let window_num = tab_num = 0
+        for (const i of JSON.parse(res)){window_num++; tab_num += parseInt(i.length);}
+        tabs_count.innerText = `Window: ${window_num}, Tab: ${tab_num}`     
 
         download(res)
     })
 
-    importBtn.addEventListener('change', ev => {
+    importBtn.addEventListener('click', async ev => {
+        importFile.click()
+    })
+
+    importFile.addEventListener('change', ev => {
         const [file] = ev.target.files
 
         const fr = new FileReader()
@@ -48,11 +60,18 @@ document.addEventListener('DOMContentLoaded', async domEv => {
         fr.onload = () => {
             out.innerText = fr.result
 
+            let window_num = tab_num = 0
+            for (const i of JSON.parse(fr.result)){window_num++; tab_num += parseInt(i.length);}
+            tabs_count.innerText = `Window: ${window_num}, Tab: ${tab_num}`
+            
             Promise.allSettled(
                 JSON.parse(fr.result).map(w =>
-                    chrome.windows.create({
-                        url: w,
-                    }),
+                    {
+                        chrome.windows.create({
+                            url: w,
+                        })
+                    },
+
                 ),
             )
         }
