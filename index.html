@@ -2,30 +2,25 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Title</title>
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <script src="index.js"></script>
 
-        <style>
-            :root {
-                width: 300px;
-                height: 1000px;
-            }
-
-            label {
-                padding: 2px 3px;
-                border: 1px solid gray;
-                background-color: #efefef;
-            }
-        </style>
-
-        <script defer type="module" src="index.js"></script>
+        <!-- google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
-        <button id="extract">extract tabs</button>
+        <div class="btn-container">
+            <button class="btn" id="extract">extract tabs</button>
 
-        <label>
-            import tabs
-            <input type="file" id="import" accept="application/json" hidden />
-        </label>
+            <button class="btn" id="import-btn">
+                <div>import tabs</div>
+                <input type="file" id="import-file" accept="application/json" hidden />
+            </button>
+        </div>
+        
+        <div id="tabs-count" style="text-align: center;"></div>
         <pre id="out"></pre>
     </body>
 </html>
