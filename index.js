@@ -1,5 +1,3 @@
-//". . . . . . . . Save and open Chrome tabs . . . . . . . . .     . . . . . . 현재 열려있는 탭들을 저장 및 열기 . . . . . . ."
-
 const download = res => {
     let today = new Date();
 
@@ -61,13 +59,12 @@ document.addEventListener('DOMContentLoaded', async domEv => {
 
         fr.onload = () => {
             try {
-                out.innerText = fr.result
-
                 let window_num = tab_num = 0
-                
                 for (const i of JSON.parse(fr.result)){window_num++; tab_num += parseInt(i.length);}
                 tabs_count.innerText = `Window: ${window_num}, Tab: ${tab_num}`
                 
+                out.innerText = fr.result
+
                 Promise.allSettled(
                     JSON.parse(fr.result).map(w =>
                         {
