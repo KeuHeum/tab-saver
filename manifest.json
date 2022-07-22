@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "tab saver",
     "icons": { "128": "icon.png" },
-    "description": "Save and open Chrome tabs.",
+    "description": "Save and open Chrome tabs.ㅤㅤㅤㅤㅤㅤㅤㅤㅤ현재 열려있는 탭들을 저장 및 열기.",
     "version": "1.0.0",
     "permissions": ["tabs", "scripting", "activeTab", "downloads"],
     "action": {
