@@ -1,9 +1,18 @@
 {
     "manifest_version": 3,
     "name": "tab saver",
+    "version": "1.0.0",
     "icons": { "128": "icon.png" },
     "description": "Save and open Chrome tabs.ㅤㅤㅤㅤㅤㅤㅤㅤㅤ현재 열려있는 탭들을 저장 및 열기.",
-    "version": "1.0.0",
+    
+    "commands": {
+        "_execute_action": {
+          "suggested_key": {
+            "default": "Ctrl+Shift+Q",
+            "mac": "Command+Shift+Q"
+          }
+        }
+    },
     "permissions": ["tabs", "scripting", "activeTab", "downloads"],
     "action": {
         "default_popup": "./index.html",
